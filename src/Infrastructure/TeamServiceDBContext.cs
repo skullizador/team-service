@@ -17,6 +17,7 @@ namespace TeamService.Infrastructure
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using TeamService.Domain.SeedWork;
+    using TeamService.Infrastructure.EntityConfiguration;
 
     /// <summary>
     /// <see cref="TeamServiceDBContext"/>
@@ -135,6 +136,9 @@ namespace TeamService.Infrastructure
         /// </remarks>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new TeamEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new TeamAcronymEntityTypeConfiguration());
+
             var properties = modelBuilder.Model.GetEntityTypes()
                 .SelectMany(t => t.GetProperties())
                 .Where(p => p.ClrType == typeof(decimal) || p.ClrType == typeof(decimal?));
