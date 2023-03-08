@@ -10,6 +10,8 @@
 namespace TeamService.Infrastructure.Configuration
 {
     using Microsoft.Extensions.DependencyInjection;
+    using TeamService.Domain.AggregateModels.Team.Repository;
+    using TeamService.Infrastructure.Repository;
 
     /// <summary>
     /// <see cref="ServiceCollection"/>
@@ -22,6 +24,8 @@ namespace TeamService.Infrastructure.Configuration
         /// <param name="services">The services.</param>
         public static void RegisterInfrastructureServices(this IServiceCollection services)
         {
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<ITeamAcronymRepository, TeamAcronymRepository>();
         }
     }
 }
