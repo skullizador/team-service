@@ -10,6 +10,8 @@
 namespace TeamService.Domain.Configuration
 {
     using Microsoft.Extensions.DependencyInjection;
+    using TeamService.Domain.AggregateModels.Team.Builder.TeamAcronymBuilder;
+    using TeamService.Domain.AggregateModels.Team.Builder.TeamBuilder;
 
     /// <summary>
     /// <see cref="ServiceCollection"/>
@@ -22,6 +24,8 @@ namespace TeamService.Domain.Configuration
         /// <param name="services">The services.</param>
         public static void RegisterDomainServices(this IServiceCollection services)
         {
+            services.AddScoped<ITeamBuilder, TeamBuilder>();
+            services.AddScoped<ITeamAcronymBuilder, TeamAcronymBuilder>();
         }
     }
 }
