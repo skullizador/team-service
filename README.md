@@ -12,8 +12,8 @@
 - [Quick Start](#quick-start)
 
 ## Domain
-TODO: FIX IMAGE;
-![Domain](https://github.com/skullizador/bookmaker-integration/blob/main/resources/domain.png)
+
+![Domain](https://github.com/skullizador/team-service/blob/main/resources/domain.png)
 
 ## Features
 
