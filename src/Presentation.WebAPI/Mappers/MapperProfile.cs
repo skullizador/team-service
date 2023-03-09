@@ -10,6 +10,8 @@
 namespace TeamService.Presentation.WebAPI.Mappers
 {
     using AutoMapper;
+    using TeamService.Domain.AggregateModels.Team;
+    using TeamService.Presentation.WebAPI.Dto.Output;
 
     /// <summary>
     /// <see cref="MapperProfile"/>
@@ -22,6 +24,9 @@ namespace TeamService.Presentation.WebAPI.Mappers
         /// </summary>
         public MapperProfile()
         {
+            this.CreateMap<TeamAcronym, TeamAcronymDetailsDto>();
+            this.CreateMap<Team, TeamDetailsDto>();
+            this.CreateMap<Team, TeamDto>();
         }
     }
 }
