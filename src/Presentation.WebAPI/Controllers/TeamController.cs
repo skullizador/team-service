@@ -19,6 +19,7 @@ namespace TeamService.Presentation.WebAPI.Controllers
     using TeamService.Presentation.WebAPI.Dto.Input;
     using TeamService.Presentation.WebAPI.Dto.Output;
     using TeamService.Presentation.WebAPI.Queries.GetAllTeamsQuery;
+    using TeamService.Presentation.WebAPI.Queries.GetByTeamIdQuery;
     using TeamService.Presentation.WebAPI.Utils;
 
     /// <summary>
@@ -105,6 +106,26 @@ namespace TeamService.Presentation.WebAPI.Controllers
             IEnumerable<Team> teams = await this.mediator.Send(new GetAllTeamsQuery(), cancellationToken);
 
             return this.Ok(this.mapper.Map<IEnumerable<TeamDto>>(teams));
+        }
+
+        /// <summary>
+        /// Gets the team details asynchronous.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        [HttpGet("{TeamId}")]
+        [ProducesResponseType(typeof(TeamDetailsDto), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetTeamDetailsAsync([FromRoute] GetByTeamIdDto filters, CancellationToken cancellationToken)
+        {
+            Team team = await this.mediator.Send(new GetByTeamIdQuery
+            {
+                TeamId = filters.TeamId
+            }, cancellationToken);
+
+            return this.Ok(this.mapper.Map<TeamDetailsDto>(team));
         }
     }
 }
