@@ -25,6 +25,8 @@ namespace TeamService.Presentation.WebAPI.Mappers
         public MapperProfile()
         {
             this.CreateMap<TeamAcronym, TeamAcronymDetailsDto>();
+            this.CreateMap<Team, TeamDetailsDto>();
+            this.CreateMap<Team, TeamDto>();
         }
     }
 }

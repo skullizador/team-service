@@ -18,12 +18,13 @@ namespace TeamService.Presentation.WebAPI.Controllers
     using TeamService.Presentation.WebAPI.Commands.DeleteTeamCommand;
     using TeamService.Presentation.WebAPI.Dto.Input;
     using TeamService.Presentation.WebAPI.Dto.Output;
+    using TeamService.Presentation.WebAPI.Queries.GetAllTeamsQuery;
     using TeamService.Presentation.WebAPI.Utils;
 
     /// <summary>
     /// <see cref="TeamController"/>
     /// </summary>
-    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller"/>
+    /// <seealso cref="Controller"/>
     [ApiController]
     [Route("api/v1/Team")]
     public class TeamController : Controller
@@ -89,6 +90,21 @@ namespace TeamService.Presentation.WebAPI.Controllers
             }, cancellationToken);
 
             return this.Ok();
+        }
+
+        /// <summary>
+        /// Gets all teams asynchronous.
+        /// </summary>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<TeamDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
+        public async Task<IActionResult> GetAllTeamsAsync(CancellationToken cancellationToken)
+        {
+            IEnumerable<Team> teams = await this.mediator.Send(new GetAllTeamsQuery(), cancellationToken);
+
+            return this.Ok(this.mapper.Map<IEnumerable<TeamDto>>(teams));
         }
     }
 }
