@@ -40,9 +40,6 @@ namespace TeamService.Presentation.WebAPI.Queries.GetTeamAcronymByTeamIdQuery
         /// <param name="request">The request</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <returns>Response from the request</returns>
-        /// <exception cref="TeamService.Domain.Exceptions.NotFoundException">
-        /// The team with id {request.TeamId} wasn't found.
-        /// </exception>
         /// <exception cref="NotFoundException">The team with id {request.TeamId} wasn't found.</exception>
         public async Task<IEnumerable<TeamAcronym>> Handle(GetTeamAcronymByTeamIdQuery request, CancellationToken cancellationToken)
         {

@@ -15,7 +15,7 @@ namespace TeamService.Presentation.WebAPI.Validation.Team
     /// <summary>
     /// <see cref="GetByTeamAcronymIdDtoValidator"/>
     /// </summary>
-    /// <seealso cref="FluentValidation.AbstractValidator&lt;TeamService.Presentation.WebAPI.Dto.Input.GetByTeamAcronymIdDto&gt;"/>
+    /// <seealso cref="AbstractValidator{GetByTeamAcronymIdDto}"/>
     public class GetByTeamAcronymIdDtoValidator : AbstractValidator<GetByTeamAcronymIdDto>
     {
         /// <summary>

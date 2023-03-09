@@ -14,7 +14,7 @@ namespace TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand
     /// <summary>
     /// <see cref="DeleteTeamAcronymCommand"/>
     /// </summary>
-    /// <seealso cref="MediatR.INotification"/>
+    /// <seealso cref="INotification"/>
     public class DeleteTeamAcronymCommand : INotification
     {
         /// <summary>

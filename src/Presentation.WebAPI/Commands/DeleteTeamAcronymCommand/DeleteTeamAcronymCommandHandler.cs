@@ -16,7 +16,7 @@ namespace TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand
     /// <summary>
     /// <see cref="DeleteTeamAcronymCommandHandler"/>
     /// </summary>
-    /// <seealso cref="MediatR.INotificationHandler&lt;TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand.DeleteTeamAcronymCommand&gt;"/>
+    /// <seealso cref="INotificationHandler{DeleteTeamAcronymCommand}"/>
     public class DeleteTeamAcronymCommandHandler : INotificationHandler<DeleteTeamAcronymCommand>
     {
         /// <summary>
@@ -38,9 +38,6 @@ namespace TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand
         /// </summary>
         /// <param name="notification">The notification</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <exception cref="TeamService.Domain.Exceptions.NotFoundException">
-        /// The team acronym with id {notification.TeamAcronymId} wasn't found.
-        /// </exception>
         /// <exception cref="NotFoundException">
         /// The team acronym with id {notification.TeamAcronymId} wasn't found.
         /// </exception>

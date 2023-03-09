@@ -15,7 +15,7 @@ namespace TeamService.Presentation.WebAPI.Validation.Team
     /// <summary>
     /// <see cref="CreateTeamDtoValidator"/>
     /// </summary>
-    /// <seealso cref="FluentValidation.AbstractValidator&lt;TeamService.Presentation.WebAPI.Dto.Input.CreateTeamDto&gt;"/>
+    /// <seealso cref="AbstractValidator{CreateTeamDto}"/>
     public class CreateTeamDtoValidator : AbstractValidator<CreateTeamDto>
     {
         /// <summary>

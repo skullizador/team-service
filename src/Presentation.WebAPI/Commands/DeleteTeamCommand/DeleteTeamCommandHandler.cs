@@ -38,9 +38,6 @@ namespace TeamService.Presentation.WebAPI.Commands.DeleteTeamCommand
         /// </summary>
         /// <param name="notification">The notification</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        /// <exception cref="TeamService.Domain.Exceptions.NotFoundException">
-        /// The team with id {notification.TeamId} wasn't found.
-        /// </exception>
         /// <exception cref="NotFoundException">
         /// The team with id {notification.TeamId} wasn't found.
         /// </exception>
