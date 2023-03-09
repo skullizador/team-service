@@ -14,7 +14,7 @@ namespace TeamService.Presentation.WebAPI.Commands.DeleteTeamCommand
     /// <summary>
     /// <see cref="DeleteTeamCommand"/>
     /// </summary>
-    /// <seealso cref="MediatR.INotification"/>
+    /// <seealso cref="INotification"/>
     public class DeleteTeamCommand : INotification
     {
         /// <summary>
