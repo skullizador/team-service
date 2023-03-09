@@ -17,8 +17,14 @@
 
 ## Features
 
-TODO: ADD FEATURES;
-*  :heavy_check_mark:
+* Create team :heavy_check_mark:
+* Update team :heavy_check_mark:
+* Delete team :heavy_check_mark:
+* Get all teams :heavy_check_mark:
+* Get team information :heavy_check_mark:
+* Create team acronym :heavy_check_mark:
+* Delete team acronym :heavy_check_mark:
+* Get acronyms in a team :heavy_check_mark:
 
 ## Requirements
 The application can be run locally or in a docker container, the requirements for each setup are listed below.
