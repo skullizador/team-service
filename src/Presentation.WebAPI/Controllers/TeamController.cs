@@ -15,6 +15,7 @@ namespace TeamService.Presentation.WebAPI.Controllers
     using Microsoft.AspNetCore.Mvc;
     using TeamService.Domain.AggregateModels.Team;
     using TeamService.Presentation.WebAPI.Commands.CreateTeamCommand;
+    using TeamService.Presentation.WebAPI.Commands.DeleteTeamCommand;
     using TeamService.Presentation.WebAPI.Dto.Input;
     using TeamService.Presentation.WebAPI.Dto.Output;
     using TeamService.Presentation.WebAPI.Utils;
@@ -68,6 +69,26 @@ namespace TeamService.Presentation.WebAPI.Controllers
             }, cancellationToken);
 
             return this.Ok(this.mapper.Map<TeamDetailsDto>(team));
+        }
+
+        /// <summary>
+        /// Deletes the team asynchronous.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        [HttpDelete("{TeamId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> DeleteTeamAsync([FromRoute] GetByTeamIdDto filters, CancellationToken cancellationToken)
+        {
+            await this.mediator.Publish(new DeleteTeamCommand
+            {
+                TeamId = filters.TeamId,
+            }, cancellationToken);
+
+            return this.Ok();
         }
     }
 }
