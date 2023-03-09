@@ -15,18 +15,34 @@ namespace TeamService.Presentation.WebAPI.Controllers
     using Microsoft.AspNetCore.Mvc;
     using TeamService.Domain.AggregateModels.Team;
     using TeamService.Presentation.WebAPI.Commands.CreateTeamAcronymCommand;
+    using TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand;
     using TeamService.Presentation.WebAPI.Dto.Input;
     using TeamService.Presentation.WebAPI.Dto.Output;
     using TeamService.Presentation.WebAPI.Utils;
 
+    /// <summary>
+    /// <see cref="TeamAcronymController"/>
+    /// </summary>
+    /// <seealso cref="Controller"/>
     [ApiController]
     [Route("api/v1/TeamAcronym")]
     public class TeamAcronymController : Controller
     {
+        /// <summary>
+        /// The mapper
+        /// </summary>
         private readonly IMapper mapper;
 
+        /// <summary>
+        /// The mediator
+        /// </summary>
         private readonly IMediator mediator;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TeamAcronymController"/> class.
+        /// </summary>
+        /// <param name="mapper">The mapper.</param>
+        /// <param name="mediator">The mediator.</param>
         public TeamAcronymController(
             IMapper mapper,
             IMediator mediator)
@@ -35,6 +51,13 @@ namespace TeamService.Presentation.WebAPI.Controllers
             this.mediator = mediator;
         }
 
+        /// <summary>
+        /// Adds the acronym to team asynchronous.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="createAcronymDto">The create acronym dto.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(TeamAcronymDetailsDto), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
@@ -51,6 +74,28 @@ namespace TeamService.Presentation.WebAPI.Controllers
             }, cancellationToken);
 
             return this.Ok(this.mapper.Map<TeamAcronymDetailsDto>(acronym));
+        }
+
+        /// <summary>
+        /// Deletes the team acronym asynchronous.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        [HttpDelete("{TeamAcronymId}")]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> DeleteTeamAcronymAsync(
+            [FromRoute] GetByTeamAcronymIdDto filters,
+            CancellationToken cancellationToken)
+        {
+            await this.mediator.Publish(new DeleteTeamAcronymCommand
+            {
+                TeamAcronymId = filters.TeamAcronymId,
+            }, cancellationToken);
+
+            return this.Ok();
         }
     }
 }
