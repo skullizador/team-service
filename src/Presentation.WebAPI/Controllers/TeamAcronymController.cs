@@ -18,6 +18,7 @@ namespace TeamService.Presentation.WebAPI.Controllers
     using TeamService.Presentation.WebAPI.Commands.DeleteTeamAcronymCommand;
     using TeamService.Presentation.WebAPI.Dto.Input;
     using TeamService.Presentation.WebAPI.Dto.Output;
+    using TeamService.Presentation.WebAPI.Queries.GetTeamAcronymByTeamIdQuery;
     using TeamService.Presentation.WebAPI.Utils;
 
     /// <summary>
@@ -96,6 +97,26 @@ namespace TeamService.Presentation.WebAPI.Controllers
             }, cancellationToken);
 
             return this.Ok();
+        }
+
+        /// <summary>
+        /// Gets the team acronyms by team identifier asynchronous.
+        /// </summary>
+        /// <param name="filters">The filters.</param>
+        /// <param name="cancellationToken">The cancellation token.</param>
+        /// <returns></returns>
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<TeamAcronymDetailsDto>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ErrorMessage), (int)HttpStatusCode.NotFound)]
+        public async Task<IActionResult> GetTeamAcronymsByTeamIdAsync([FromQuery] GetByTeamIdDto filters, CancellationToken cancellationToken)
+        {
+            IEnumerable<TeamAcronym> acronyms = await this.mediator.Send(new GetTeamAcronymByTeamIdQuery
+            {
+                TeamId = filters.TeamId
+            }, cancellationToken);
+
+            return this.Ok(this.mapper.Map<IEnumerable<TeamAcronymDetailsDto>>(acronyms));
         }
     }
 }
